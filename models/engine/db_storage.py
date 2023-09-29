@@ -61,19 +61,15 @@ class DBStorage:
 
     def get(self, cls, id):
         """retrieves specific object
-
         Args:
             cls: class of object as string
             id (str): id of object as string
-
         Return: found object or None
         """
         all_class = self.all(cls)
-
         for obj in all_class.values():
             if id == str(obj.id):
                 return obj
-
         return None
 
     def count(self, cls=None):
