@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This file contains the Review module
+This file contains views for the Review module
 """
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
@@ -14,7 +14,7 @@ from flasgger.utils import swag_from
 @app_views.route('/places/<string:place_id>/reviews',
                  methods=['GET'], strict_slashes=False)
 @swag_from('documentation/reviews/get.yml', methods=['GET'])
-def get_all_reviews(place_id):
+def get_reviews(place_id):
     """ get reviews from a spcific place """
     place = storage.get(Place, place_id)
     if place is None:
@@ -27,7 +27,7 @@ def get_all_reviews(place_id):
                  strict_slashes=False)
 @swag_from('documentation/reviews/get_id.yml', methods=['GET'])
 def get_review(review_id):
-    """ get review by id"""
+    """ get review by id """
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
@@ -37,8 +37,8 @@ def get_review(review_id):
 @app_views.route('/reviews/<string:review_id>', methods=['DELETE'],
                  strict_slashes=False)
 @swag_from('documentation/reviews/delete.yml', methods=['DELETE'])
-def del_review(review_id):
-    """ delete review by id"""
+def delete_review(review_id):
+    """ delete review by id """
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
@@ -50,8 +50,8 @@ def del_review(review_id):
 @app_views.route('/places/<string:place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
 @swag_from('documentation/reviews/post.yml', methods=['POST'])
-def create_obj_review(place_id):
-    """ create new instance """
+def post_review(place_id):
+    """ create a new review instance """
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
@@ -74,8 +74,8 @@ def create_obj_review(place_id):
 @app_views.route('/reviews/<string:review_id>', methods=['PUT'],
                  strict_slashes=False)
 @swag_from('documentation/reviews/put.yml', methods=['PUT'])
-def post_review(review_id):
-    """ updates by id """
+def update_review(review_id):
+    """ updates a review instance by id """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(Review, review_id)

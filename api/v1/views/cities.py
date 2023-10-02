@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This file contains the City module
+This file contains views for the City module
 """
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
@@ -26,7 +26,7 @@ def get_cities(state_id):
                  strict_slashes=False)
 @swag_from('documentation/city/get_id.yml', methods=['GET'])
 def get_city(city_id):
-    """ get city by id"""
+    """ get city by id """
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -36,8 +36,8 @@ def get_city(city_id):
 @app_views.route('/cities/<string:city_id>', methods=['DELETE'],
                  strict_slashes=False)
 @swag_from('documentation/city/delete.yml', methods=['DELETE'])
-def del_city(city_id):
-    """ delete city by id"""
+def delete_city(city_id):
+    """ delete city by id """
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -49,8 +49,8 @@ def del_city(city_id):
 @app_views.route('/states/<string:state_id>/cities', methods=['POST'],
                  strict_slashes=False)
 @swag_from('documentation/city/post.yml', methods=['POST'])
-def create_obj_city(state_id):
-    """ create new instance """
+def post_city(state_id):
+    """ creates new city instance """
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
@@ -69,8 +69,8 @@ def create_obj_city(state_id):
 @app_views.route('/cities/<string:city_id>', methods=['PUT'],
                  strict_slashes=False)
 @swag_from('documentation/city/put.yml', methods=['PUT'])
-def post_city(city_id):
-    """  """
+def update_city(city_id):
+    """ updates a city instance """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(City, city_id)

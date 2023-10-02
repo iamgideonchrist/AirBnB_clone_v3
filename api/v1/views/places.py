@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This file contains the Place module
+This file contains views for the Place module
 """
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
@@ -16,7 +16,7 @@ from flasgger.utils import swag_from
 @app_views.route('/cities/<string:city_id>/places',
                  methods=['GET'], strict_slashes=False)
 @swag_from('documentation/places/get.yml', methods=['GET'])
-def get_all_places(city_id):
+def get_places(city_id):
     """ list cities by id """
     city = storage.get(City, city_id)
     if city is None:
@@ -39,7 +39,7 @@ def get_place(place_id):
 @app_views.route('/places/<string:place_id>', methods=['DELETE'],
                  strict_slashes=False)
 @swag_from('documentation/places/delete.yml', methods=['DELETE'])
-def del_place(place_id):
+def delete_place(place_id):
     """ delete place by id """
     place = storage.get(Place, place_id)
     if place is None:
@@ -52,8 +52,8 @@ def del_place(place_id):
 @app_views.route('/cities/<string:city_id>/places', methods=['POST'],
                  strict_slashes=False)
 @swag_from('documentation/places/post.yml', methods=['POST'])
-def create_obj_place(city_id):
-    """ create new instance """
+def post_place(city_id):
+    """ create a new place instance """
     city = storage.get(City, city_id)
     if city is None:
         abort(404)
@@ -76,8 +76,8 @@ def create_obj_place(city_id):
 @app_views.route('/places/<string:place_id>', methods=['PUT'],
                  strict_slashes=False)
 @swag_from('documentation/places/put.yml', methods=['PUT'])
-def post_place(place_id):
-    """ update by id """
+def update_place(place_id):
+    """ update a place instance by id """
     if not request.get_json():
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     obj = storage.get(Place, place_id)
