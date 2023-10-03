@@ -201,7 +201,7 @@ No known bugs at this time.
 ### `Jennifer Huang:` - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
 ### `Joann Vuong`
 ### `Gideon Selorm Attakpah:` [GitHub](https://github.com/iamgideonchrist) - [Twitter](https://twitter.com/iamgideonchrist) - [Linkedin](https://www.linkedin.com/in/iamgideonchrist/)
-### `David Tikoli:` [GitHub](https://github.com/Dtikoli)
+### `David Tikoli:` [GitHub](https://github.com/Dtikoli) <tikolidavid@yahoo.com>
 
 ## `License`
 Public Domain. No copy write protection.
